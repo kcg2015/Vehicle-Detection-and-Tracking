@@ -149,6 +149,8 @@ Note that ```linear_assignment ``` by default minimizes an objective function. S
 Based on the linear assignment results, we keep two list for unmatched detection and unmatched trackers, respectively. In addition, any matching with an overlap less than ```iou_thrd``` signifies the existence of 
 an untracked object. Thus the tracker and detection associated in the matching are added to the lists of unmatched trackers and unmatched detection, respectively.
 
+<img src="example_imgs/detection_track_match.png" alt="Drawing" style="width: 300px;"/>
+
 ## Pipeline
 
 We include two important design parameters, ```min_hits``` and ```max_age```, in the pipe line.  The parameter ```min_hits``` is the number of consecutive matches needed to establish a track. The parameter ```max_age``` is number of consecutive unmatched detection before a track is deleted. Both parameters need to be tuned to improve the tracking and detection performance.
