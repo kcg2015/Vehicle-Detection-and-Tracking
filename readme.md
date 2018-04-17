@@ -133,6 +133,8 @@ In contrast, if measurement noise is high, the updated state is very close to th
 
 The module ```assign_detections_to_trackers(trackers, detections, iou_thrd = 0.3)``` takes from current list of trackers and new detections, output matched detections, unmatched trackers, unmatched detections.
 
+<img src="example_imgs/vehcle_detection_tracking.png" alt="Drawing" style="width: 300px;"/>
+
 ### Linear Assignment and Hungarian (Munkres) algorithm
 
 If there are multiple detections, we need to match (assign) each of them to a tracker. We use intersection over union (IOU) of a tracker bounding box and detection bounding box as a metric. We solve the maximizing the sum of IOU assignment problem using the Hungarian algorithm (also known as Munkres algorithm). The machine learning package scikit-learn has a build in utility function that implements Hungarian algorithm.
