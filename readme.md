@@ -182,9 +182,27 @@ if len(unmatched_dets)>0:
             tracker_list.append(tmp_trk)
             x_box.append(xx)
 ```
-This code blocks carries out two important tasks, 1) create a new tracker ```tmp_trk``` for the detection; 2) carries out the Kalman filter's predict stage ```tmp_trk.predict_only()```. Note that this newly created track is still in probation period, i.e., ```trk.hits =0```, so this track is yet to be established after the end pipeline. The output image is the same as the input image.
+This code blocks carries out two important tasks, 1) creating a new tracker ```tmp_trk``` for the detection; 2) carrying out the Kalman filter's predict stage ```tmp_trk.predict_only()```. Note that this newly created track is still in probation period, i.e., ```trk.hits =0```, so this track is yet established after the end pipeline. The output image is the same as the input image - the detection bounding box is not annotated.
 <img src="example_imgs/frame_01_det_track.png" alt="Drawing" style="width: 150px;"/>
 
+When the car is  detected again in the second video frame, running the following ```assign_detections_to_trackers``` returns an one-element list , an empty list, and an empty list for matched, unmatched_dets, and unmatched_trks, respectively. As shown in the following figure, we have a matched detection, which will be processed by the following code block:
+
+```
+if matched.size >0:
+        for trk_idx, det_idx in matched:
+            z = z_box[det_idx]
+            z = np.expand_dims(z, axis=0).T
+            tmp_trk= tracker_list[trk_idx]
+            tmp_trk.kalman_filter(z)
+            xx = tmp_trk.x_state.T[0].tolist()
+            xx =[xx[0], xx[2], xx[4], xx[6]]
+            x_box[trk_idx] = xx
+            tmp_trk.box =xx
+            tmp_trk.hits += 1
+```
+This code blocks carries out two important tasks, 1)carrying out the Kalman filter's predict and update stages ```tmp_trk.kalman_filter()```; 2) updating the hits of the track by one ```tmp_trk.hits +=1```. With this update,  
+```if ((trk.hits >= min_hits) and (trk.no_losses <=max_age)) ``` is statified, so the track is fully established. The bounding box is annotated in the output.
+<img src="example_imgs/frame_02_det_track.png" alt="Drawing" style="width: 150px;"/>
 ## Issues
 
 The main issue is occlusion. For example, when one car is passing another car, the two cars can be very close to each other. This can fool the detector to output a single(and bigger bounding) box, instead of two separate bounding boxes. In addition, the tracking algorithm may treat this detection as a new detection and set up a new track.  The tracking algorithm may fail again when one the passing car moves away from another car. 
