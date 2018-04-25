@@ -146,8 +146,8 @@ Note that ```linear_assignment ``` by default minimizes an objective function. S
 
 ### Unmatched detections and trackers
 
-Based on the linear assignment results, we keep two list for unmatched detection and unmatched trackers, respectively. In addition, any matching with an overlap less than ```iou_thrd``` signifies the existence of 
-an untracked object. Thus the tracker and detection associated in the matching are added to the lists of unmatched trackers and unmatched detection, respectively.
+Based on the linear assignment results, we keep two list for unmatched detection and unmatched trackers, respectively. When a car enters into a frame and is first detected, it is not matched with any existing track, thus this particular detection is referred to as unmatched detection, as shown in the following figure. In addition, any matching with an overlap less than ```iou_thrd``` signifies the existence of 
+an untracked object. When a car leaves the frame, the prviously established track has no detection to associate with. In this scenario, the track is referred to as unmatched track. Thus the tracker and detection associated in the matching are added to the lists of unmatched trackers and unmatched detection, respectively.
 
 <img src="example_imgs/detection_track_match.png" alt="Drawing" style="width: 300px;"/>
 
