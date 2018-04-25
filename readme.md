@@ -182,7 +182,7 @@ if len(unmatched_dets)>0:
             tracker_list.append(tmp_trk)
             x_box.append(xx)
 ```
-This code blocks carries out two important tasks, 1) create a new tracker ```tmp_trk``` for the detection; 2) carries out the Kalman filter's predict stage ```tmp_trk.predict_only()```. Note that this newly created track is still in probation period, i.e., ```trk.hits =0```, so this track is yet to be established after the end pipeline. 
+This code blocks carries out two important tasks, 1) create a new tracker ```tmp_trk``` for the detection; 2) carries out the Kalman filter's predict stage ```tmp_trk.predict_only()```. Note that this newly created track is still in probation period, i.e., ```trk.hits =0```, so this track is yet to be established after the end pipeline. The output image is the same as the input image.
 <img src="example_imgs/frame_01_det_track.png" alt="Drawing" style="width: 150px;"/>
 
 ## Issues
