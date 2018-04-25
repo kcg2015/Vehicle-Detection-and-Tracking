@@ -157,6 +157,9 @@ We include two important design parameters, ```min_hits``` and ```max_age```, in
 
 The pipeline deals with matched detection, unmatched detection, and unmatched trackers sequentially. We annotate the tracks that meet the ```min_hits``` and ```max_age``` condition. Proper book keep is also needed to deleted the stale tracks. 
 
+The following examples shows the process of the pipeline.
+
+<img src="example_imgs/detection_track_match.png" alt="Drawing" style="width: 300px;"/>
 
 ## Issues
 
