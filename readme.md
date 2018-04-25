@@ -159,7 +159,7 @@ The pipeline deals with matched detection, unmatched detection, and unmatched tr
 
 The following examples shows the process of the pipeline.
 
-<img src="example_imgs/frame_01_det_track.png" alt="Drawing" style="width: 300px;"/>
+<img src="example_imgs/frame_01_det_track.png" alt="Drawing" style="width: 150px;"/>
 
 ## Issues
 
