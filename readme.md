@@ -182,7 +182,7 @@ if len(unmatched_dets)>0:
             tracker_list.append(tmp_trk)
             x_box.append(xx)
 ```
-This code blocks carries out two important tasks, 1) creating a new tracker ```tmp_trk``` for the detection; 2) carrying out the Kalman filter's predict stage ```tmp_trk.predict_only()```. Note that this newly created track is still in probation period, i.e., ```trk.hits =0```, so this track is yet established after the end pipeline. The output image is the same as the input image - the detection bounding box is not annotated.
+This code block carries out two important tasks, 1) creating a new tracker ```tmp_trk``` for the detection; 2) carrying out the Kalman filter's predict stage ```tmp_trk.predict_only()```. Note that this newly created track is still in probation period, i.e., ```trk.hits =0```, so this track is yet established after the end pipeline. The output image is the same as the input image - the detection bounding box is not annotated.
 <img src="example_imgs/frame_01_det_track.png" alt="Drawing" style="width: 150px;"/>
 
 When the car is  detected again in the second video frame, running the following ```assign_detections_to_trackers``` returns an one-element list , an empty list, and an empty list for matched, unmatched_dets, and unmatched_trks, respectively. As shown in the following figure, we have a matched detection, which will be processed by the following code block:
@@ -200,7 +200,7 @@ if matched.size >0:
             tmp_trk.box =xx
             tmp_trk.hits += 1
 ```
-This code blocks carries out two important tasks, 1) carrying out the Kalman filter's predict and update stages ```tmp_trk.kalman_filter()```; 2) updating the hits of the track by one ```tmp_trk.hits +=1```. With this update,  
+This code block carries out two important tasks, 1) carrying out the Kalman filter's predict and update stages ```tmp_trk.kalman_filter()```; 2) updating the hits of the track by one ```tmp_trk.hits +=1```. With this update,  
 ```if ((trk.hits >= min_hits) and (trk.no_losses <=max_age)) ``` is statified, so the track is fully established. The bounding box is annotated in the output.
 <img src="example_imgs/frame_02_det_track.png" alt="Drawing" style="width: 150px;"/>
 ## Issues
