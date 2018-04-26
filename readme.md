@@ -200,8 +200,8 @@ if matched.size >0:
             tmp_trk.box =xx
             tmp_trk.hits += 1
 ```
-This code block carries out two important tasks, 1) carrying out the Kalman filter's predict and update stages ```tmp_trk.kalman_filter()```; 2) updating the hits of the track by one ```tmp_trk.hits +=1```. With this update,  
-```if ((trk.hits >= min_hits) and (trk.no_losses <=max_age)) ``` is statified, so the track is fully established. The bounding box is annotated in the output.
+This code block carries out two important tasks, 1) carrying out the Kalman filter's prediction and update stages ```tmp_trk.kalman_filter()```; 2) increasing the hits of the track by one ```tmp_trk.hits +=1```. With this update,  
+the condition ```if ((trk.hits >= min_hits) and (trk.no_losses <=max_age)) ``` is statified, so the track is fully established. As the result, the bounding box is annotated in the output image, as shown in the figure below.
 <img src="example_imgs/frame_02_det_track.png" alt="Drawing" style="width: 150px;"/>
 ## Issues
 
