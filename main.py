@@ -189,7 +189,7 @@ def pipeline(img):
     
 if __name__ == "__main__":    
     
-    det = CarDetector()
+    det = detector.CarDetector()
     
     if debug: # test on a sequence of images
         images = [plt.imread(file) for file in glob.glob('./test_images/*.jpg')]
