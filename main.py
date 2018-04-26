@@ -99,7 +99,7 @@ def pipeline(img):
     x_box =[]
     if debug: 
         for i in range(len(z_box)):
-           img1= draw_box_label(img, z_box[i], box_color=(255, 0, 0))
+           img1= helpers.draw_box_label(img, z_box[i], box_color=(255, 0, 0))
            plt.imshow(img1)
         plt.show()
     
@@ -170,7 +170,7 @@ def pipeline(img):
              if debug:
                  print('updated box: ', x_cv2)
                  print()
-             img= draw_box_label(img, x_cv2) # Draw the bounding boxes on the 
+             img= helpers.draw_box_label(img, x_cv2) # Draw the bounding boxes on the 
                                              # images
     # Book keeping
     deleted_tracks = filter(lambda x: x.no_losses >max_age, tracker_list)  
