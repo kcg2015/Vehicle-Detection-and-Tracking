@@ -128,17 +128,17 @@ if __name__ == "__main__":
     img=images[3]
 
     plt.figure(figsize=(10, 14))
-    draw_box_label(img, x_init_box, box_color=(0, 255, 0))
+    helpers.draw_box_label(img, x_init_box, box_color=(0, 255, 0))
     ax = plt.subplot(3, 1, 1)
     plt.imshow(img)
     plt.title('Initial: '+str(x_init_box))
     
-    draw_box_label(img, z, box_color=(255, 0, 0))
+    helpers.draw_box_label(img, z, box_color=(255, 0, 0))
     ax = plt.subplot(3, 1, 2)
     plt.imshow(img)
     plt.title('Measurement: '+str(z))
     
-    draw_box_label(img, x_updated_box)
+    helpers.draw_box_label(img, x_updated_box)
     ax = plt.subplot(3, 1, 3)
     plt.imshow(img)
     plt.title('Updated: '+str(x_updated_box))
