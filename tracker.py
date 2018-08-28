@@ -41,7 +41,7 @@ class Tracker(): # class for Kalman Filter based tracker
         
         
         # Initialize the state covariance
-        self.L = 100.0
+        self.L = 10.0
         self.P = np.diag(self.L*np.ones(8))
         
         
@@ -52,7 +52,7 @@ class Tracker(): # class for Kalman Filter based tracker
                             self.Q_comp_mat, self.Q_comp_mat)
         
         # Initialize the measurement covariance
-        self.R_ratio = 1.0/16.0
+        self.R_scaler = 1.0
         self.R_diag_array = self.R_ratio * np.array([self.L, self.L, self.L, self.L])
         self.R = np.diag(self.R_diag_array)
         
