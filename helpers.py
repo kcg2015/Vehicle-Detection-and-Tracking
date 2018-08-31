@@ -1,10 +1,9 @@
 #!/usr/bin/env python2
 # -*- coding: utf-8 -*-
 """
-Created on Tue Jun 20 14:51:33 2017
-
-@author: kyleguan
+Helper classes and functions for detection and tracking
 """
+
 import numpy as np
 import cv2
 
@@ -39,8 +38,6 @@ def box_union(a, b):
 def box_iou(a, b):
     return box_intersection(a, b) / box_union(a, b);
 
-
-
 def box_iou2(a, b):
     '''
     Helper funciton to calculate the ratio between intersection and the union of
@@ -55,8 +52,6 @@ def box_iou2(a, b):
     s_b = (b[2] - b[0])*(b[3] - b[1])
   
     return float(s_intsec)/(s_a + s_b -s_intsec)
-
-
 
 def convert_to_pixel(box_yolo, img, crop_range):
     '''
