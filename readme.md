@@ -125,11 +125,11 @@ The state, process, and measurement noises are :
                             self.Q_comp_mat, self.Q_comp_mat)
         
 # Initialize the measurement covariance
-self.R_ratio = 1.0/16.0
+self.R_scaler = 1.0/16.0
 self.R_diag_array = self.R_ratio * np.array([self.L, self.L, self.L, self.L])
 self.R = np.diag(self.R_diag_array)
 ```
-Here  ```self.R_ratio``` represents the "magnitude" of measurement noise relative to state noise. A low ```self.R_ratio``` indicates a more reliable  measurement. The following figures visualize the impact of measurement noise to the Kalman filter process. The green bounding box represents the prediction (initial) state. The red bounding box represents the measurement.
+Here  ```self.R_scaler``` represents the "magnitude" of measurement noise relative to state noise. A low ```self.R_scaler``` indicates a more reliable measurement. The following figures visualize the impact of measurement noise to the Kalman filter process. The green bounding box represents the prediction (initial) state. The red bounding box represents the measurement.
 If measurement noise is low, the updated state (aqua colored bounding box) is very close to the measurement (aqua bounding box completely overlaps over the red bounding box).
 
 <img src="example_imgs/low_meas_noise.png" alt="Drawing" style="width: 300px;"/>
