@@ -214,6 +214,6 @@ the condition ```if ((trk.hits >= min_hits) and (trk.no_losses <=max_age)) ``` i
 <img src="example_imgs/frame_02_det_track.png" alt="Drawing" style="width: 150px;"/>
 ## Issues
 
-The main issue is occlusion. For example, when one car is passing another car, the two cars can be very close to each other. This can fool the detector to output a single(and bigger bounding) box, instead of two separate bounding boxes. In addition, the tracking algorithm may treat this detection as a new detection and set up a new track.  The tracking algorithm may fail again when one the passing car moves away from another car. 
+The main issue is occlusion. For example, when one car is passing another car, the two cars can be very close to each other. This can fool the detector to output a single (and bigger bounding) box, instead of two separate bounding boxes. In addition, the tracking algorithm may treat this detection as a new detection and sets up a new track.  The tracking algorithm may fail again when one of the passing car moves away from another car. 
 
 
