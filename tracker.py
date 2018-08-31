@@ -46,7 +46,7 @@ class Tracker(): # class for Kalman Filter based tracker
         
         
         # Initialize the process covariance
-        self.Q_comp_mat = np.array([[self.dt**4/2., self.dt**3/2.],
+        self.Q_comp_mat = np.array([[self.dt**4/4., self.dt**3/2.],
                                     [self.dt**3/2., self.dt**2]])
         self.Q = block_diag(self.Q_comp_mat, self.Q_comp_mat, 
                             self.Q_comp_mat, self.Q_comp_mat)
@@ -103,7 +103,7 @@ if __name__ == "__main__":
     # Creat an instance
     trk = Tracker() 
     # Test R_ratio   
-    trk.R_ratio = 1.0/16
+    trk.R_scaler = 1.0/16
     # Update measurement noise covariance matrix
     trk.update_R()
     # Initial state
