@@ -1,13 +1,15 @@
 #!/usr/bin/env python2
 # -*- coding: utf-8 -*-
-
+'''
+Implement and test tracker
+'''
 import numpy as np
 from numpy import dot
 from scipy.linalg import inv, block_diag
 
 
 
-class Tracker(): # class for Kalman Filter based tracker
+class Tracker(): # class for Kalman Filter-based tracker
     def __init__(self):
         # Initialize parametes for tracker (history)
         self.id = 0  # tracker's id 
