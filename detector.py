@@ -1,5 +1,5 @@
 '''
-Script to test traffic light localization and detection
+Implement and test car detection (localization)
 '''
 
 import numpy as np
@@ -11,7 +11,7 @@ import time
 from glob import glob
 cwd = os.path.dirname(os.path.realpath(__file__))
 
-# Uncomment the following two lines if need to use the visualization_tunitls
+# Uncomment the following two lines if need to use the Tensorflow visualization_unitls
 #os.chdir(cwd+'/models')
 #from object_detection.utils import visualization_utils as vis_util
 
@@ -23,8 +23,8 @@ class CarDetector(object):
         os.chdir(cwd)
         
         #Tensorflow localization/detection model
-        # Single-shot-dectection with mobile net architecture trained on COCO
-        # dataset
+        # Single-shot-dectection with mobile net architecture trained on COCO dataset
+        
         detect_model_name = 'ssd_mobilenet_v1_coco_11_06_2017'
         
         PATH_TO_CKPT = detect_model_name + '/frozen_inference_graph.pb'
@@ -67,7 +67,8 @@ class CarDetector(object):
         return np.array(box_pixel)       
         
     def get_localization(self, image, visual=False):  
-        """Determines the locations of the traffic light in the image
+        
+        """Determines the locations of the cars in the image
 
         Args:
             image: camera image
@@ -116,7 +117,7 @@ class CarDetector(object):
     
               cls = classes.tolist()
               
-              # The ID for car is 3 
+              # The ID for car in COCO data set is 3 
               idx_vec = [i for i, v in enumerate(cls) if ((v==3) and (scores[i]>0.3))]
               
               if len(idx_vec) ==0:
@@ -144,7 +145,7 @@ class CarDetector(object):
         return self.car_boxes
         
 if __name__ == '__main__':
-        
+        # Test the performance of the detector
         det =CarDetector()
         os.chdir(cwd)
         TEST_IMAGE_PATHS= glob(os.path.join('test_images/', '*.jpg'))
