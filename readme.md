@@ -11,7 +11,7 @@ This repo illustrates the detection and tracking of multiple vehicles using a ca
   * tracker.py  -- implements Kalman Filter-based prediction and update for tracking
   * main.py -- implements the detection and tracking pipeline, including detection-track assignment and track management
   * helpers.py -- helper functions
-  * ssd_mobilenet_v1_coco_11_06_2017/
+  * ssd_mobilenet_v1_coco_11_06_2017/frozen_inference_graph.pb -- pre-trained mobilenet-coco model
 
 ## Detection
 In the pipeline, vehicle (car) detection takes a captured image as input and produces the bounding boxes as the output. We use TensorFlow Object Detection API, which is an open source framework built on top of TensorFlow to construct, train and deploy object detection models. The Object Detection API also comes with a collection of detection models pre-trained on the COCO dataset that are well suited for fast prototyping. Specifically, we use a lightweight model: ssd\_mobilenet\_v1\_coco that is based on Single Shot Multibox Detection (SSD) framework with minimal modification. Though this is a general-purpose detection model (not specifically optimized for vehicle detection), we find this model achieves the balance between bounding box accuracy and inference time.
