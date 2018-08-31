@@ -4,8 +4,12 @@
 ## Overview
 This repo illustrates the detection and tracking of multiple vehicles using a camera mounted inside a self-driving car.  The aim here is to provide devlopers, researchers, and engineers a simple framework to quickly iterate different detectors and tracking algorithms. In the process, I focus on simplicity and readability of the code. The detection and tracking pipeline is relatively staight forward. It first initializes a detector and a tracker. Next, detector localizes the vehicles in each video frame. The tracker is then updated with the detection results. Finally the tracking results are annotated and displayed in a video frame.
 
+## Key files in this repo
+  
+  * helper.py -- helper functions
+
 ## Detection
-In this project, vehicle (car) detection takes a captured image as input and produces the bounding boxes as the output. We use TensorFlow Object Detection API, which is an open source framework built on top of TensorFlow to construct, train and deploy object detection models. The Object Detection API also comes with a collection of detection models pre-trained on the COCO dataset that are well suited for fast prototyping. Specifically, we use a lightweight model: ssd\_mobilenet\_v1\_coco that is based on Single Shot Multibox Detection (SSD) framework with minimal modification. Though this is a general-purpose detection model (not specifically optimized for car detection), we find this model meets our objective of achieving the balance between good bounding box accuracy and reasonable inference time.
+In the pipeline, vehicle (car) detection takes a captured image as input and produces the bounding boxes as the output. We use TensorFlow Object Detection API, which is an open source framework built on top of TensorFlow to construct, train and deploy object detection models. The Object Detection API also comes with a collection of detection models pre-trained on the COCO dataset that are well suited for fast prototyping. Specifically, we use a lightweight model: ssd\_mobilenet\_v1\_coco that is based on Single Shot Multibox Detection (SSD) framework with minimal modification. Though this is a general-purpose detection model (not specifically optimized for vehicle detection), we find this model achieves the balance between bounding box accuracy and inference time.
 
 The detector is implemented in ```CarDetector``` class in detector.py. The output are coordinates the bounding boxes (in the format of [y\_up, x\_left, y\_down, x\_right] ) of all the detected vehicles.
 
