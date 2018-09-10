@@ -130,6 +130,7 @@ def pipeline(img):
             x_box[trk_idx] = xx
             tmp_trk.box =xx
             tmp_trk.hits += 1
+            tmp_trk.no_losses = 0
     
     # Deal with unmatched detections      
     if len(unmatched_dets)>0:
