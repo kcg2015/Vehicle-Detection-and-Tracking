@@ -55,7 +55,7 @@ class Tracker(): # class for Kalman Filter-based tracker
         
         # Initialize the measurement covariance
         self.R_scaler = 1.0
-        self.R_diag_array = self.R_ratio * np.array([self.L, self.L, self.L, self.L])
+        self.R_diag_array = self.R_scaler * np.array([self.L, self.L, self.L, self.L])
         self.R = np.diag(self.R_diag_array)
         
         
