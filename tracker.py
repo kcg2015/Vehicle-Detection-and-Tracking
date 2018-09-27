@@ -60,7 +60,7 @@ class Tracker(): # class for Kalman Filter-based tracker
         
         
     def update_R(self):   
-        R_diag_array = self.R_ratio * np.array([self.L, self.L, self.L, self.L])
+        R_diag_array = self.R_scaler * np.array([self.L, self.L, self.L, self.L])
         self.R = np.diag(R_diag_array)
         
         
