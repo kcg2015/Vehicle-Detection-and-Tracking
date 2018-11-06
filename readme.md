@@ -2,7 +2,7 @@
 
 
 ## Overview
-This repo illustrates the detection and tracking of multiple vehicles using a camera mounted inside a self-driving car.  The aim here is to provide devlopers, researchers, and engineers a simple framework to quickly iterate different detectors and tracking algorithms. In the process, I focus on simplicity and readability of the code. The detection and tracking pipeline is relatively staight forward. It first initializes a detector and a tracker. Next, detector localizes the vehicles in each video frame. The tracker is then updated with the detection results. Finally the tracking results are annotated and displayed in a video frame.
+This repo illustrates the detection and tracking of multiple vehicles using a camera mounted inside a self-driving car.  The aim here is to provide developers, researchers, and engineers a simple framework to quickly iterate different detectors and tracking algorithms. In the process, I focus on simplicity and readability of the code. The detection and tracking pipeline is relatively staight forward. It first initializes a detector and a tracker. Next, detector localizes the vehicles in each video frame. The tracker is then updated with the detection results. Finally the tracking results are annotated and displayed in a video frame.
 
 ## Key files in this repo
   
