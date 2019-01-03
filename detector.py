@@ -122,6 +122,7 @@ class CarDetector(object):
               
               if len(idx_vec) ==0:
                   print('no detection!')
+                  self.car_boxes = []  
               else:
                   tmp_car_boxes=[]
                   for idx in idx_vec:
