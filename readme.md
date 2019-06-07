@@ -146,7 +146,7 @@ The module ```assign_detections_to_trackers(trackers, detections, iou_thrd = 0.3
 
 ### Linear Assignment and Hungarian (Munkres) algorithm
 
-If there are multiple detections, we need to match (assign) each of them to a tracker. We use intersection over union (IOU) of a tracker bounding box and detection bounding box as a metric. We solve the maximizing the sum of IOU assignment problem using the Hungarian algorithm (also known as Munkres algorithm). The machine learning package scikit-learn has a build in utility function that implements Hungarian algorithm.
+If there are multiple detections, we need to match (assign) each of them to a tracker. We use intersection over union (IOU) of a tracker bounding box and detection bounding box as a metric. We solve the maximizing the sum of IOU assignment problem using the Hungarian algorithm (also known as Munkres algorithm). The machine learning package scikit-learn has a build-in utility function that implements the Hungarian algorithm.
 
 ```
 matched_idx = linear_assignment(-IOU_mat)   
@@ -155,18 +155,18 @@ Note that ```linear_assignment ``` by default minimizes an objective function. S
 
 ### Unmatched detections and trackers
 
-Based on the linear assignment results, we keep two lists for unmatched detection and unmatched trackers, respectively. When a car enters into a frame and is first detected, it is not matched with any existing track, thus this particular detection is referred to as unmatched detection, as shown in the following figure. In addition, any matching with an overlap less than ```iou_thrd``` signifies the existence of 
-an untracked object. When a car leaves the frame, the previously established track has no detection to associate with. In this scenario, the track is referred to as unmatched track. Thus, the tracker and detection associated in the matching are added to the lists of unmatched trackers and unmatched detection, respectively.
+Based on the linear assignment results, we keep two lists for unmatched detections and unmatched trackers, respectively. When a car enters into a frame and is first detected, it is not matched with any existing tracks, thus this particular detection is referred to as an unmatched detection, as shown in the following figure. In addition, any matching with an overlap less than ```iou_thrd``` signifies the existence of 
+an untracked object. When a car leaves the frame, the previously established track has no more detection to associate with. In this scenario, the track is referred to as unmatched track. Thus, the tracker and the detection associated in the matching are added to the lists of unmatched trackers and unmatched detection, respectively.
 
 <img src="example_imgs/detection_track_match.png" alt="Drawing" style="width: 300px;"/>
 
 ## Pipeline
 
-We include two important design parameters, ```min_hits``` and ```max_age```, in the pipe line.  The parameter ```min_hits``` is the number of consecutive matches needed to establish a track. The parameter ```max_age``` is number of consecutive unmatched detection before a track is deleted. Both parameters need to be tuned to improve the tracking and detection performance.
+We include two important design parameters, ```min_hits``` and ```max_age```, in the pipeline.  The parameter ```min_hits``` is the number of consecutive matches needed to establish a track. The parameter ```max_age``` is number of consecutive unmatched detections before a track is deleted. Both parameters need to be tuned to improve the tracking and detection performance.
 
-The pipeline deals with matched detection, unmatched detection, and unmatched trackers sequentially. We annotate the tracks that meet the ```min_hits``` and ```max_age``` condition. Proper book keep is also needed to deleted the stale tracks. 
+The pipeline deals with matched detection, unmatched detection, and unmatched trackers sequentially. We annotate the tracks that meet the ```min_hits``` and ```max_age``` condition. Proper book keeping is also needed to deleted the stale tracks. 
 
-The following examples shows the process of the pipeline. When the car is first detected in the first video frame, running the following line of code returns an empty list , an one-element list, and an empty list  for ```matched```, ```unmatched_dets```, and ```unmatched_trks```, respectively. 
+The following examples shows the process of the pipeline. When the car is first detected in the first video frame, running the following line of code returns an empty list, an one-element list, and an empty list  for ```matched```, ```unmatched_dets```, and ```unmatched_trks```, respectively. 
 
 ```
 matched, unmatched_dets, unmatched_trks \
@@ -214,6 +214,6 @@ the condition ```if ((trk.hits >= min_hits) and (trk.no_losses <=max_age)) ``` i
 <img src="example_imgs/frame_02_det_track.png" alt="Drawing" style="width: 150px;"/>
 ## Issues
 
-The main issue is occlusion. For example, when one car is passing another car, the two cars can be very close to each other. This can fool the detector to output a single (and bigger bounding) box, instead of two separate bounding boxes. In addition, the tracking algorithm may treat this detection as a new detection and sets up a new track.  The tracking algorithm may fail again when one of the passing car moves away from another car. 
+The main issue is occlusion. For example, when one car is passing another car, the two cars can be very close to each other. This can fool the detector into outputing a single (and possibly bigger bounding) box, instead of two separate bounding boxes. In addition, the tracking algorithm may treat this detection as a new detection and sets up a new track.  The tracking algorithm may fail again when one of the passing car moves away from another car. 
 
 
