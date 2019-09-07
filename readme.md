@@ -16,7 +16,7 @@ This repo illustrates the detection and tracking of multiple vehicles using a ca
 ## Detection
 In the pipeline, vehicle (car) detection takes a captured image as input and produces the bounding boxes as the output. We use TensorFlow Object Detection API, which is an open source framework built on top of TensorFlow to construct, train and deploy object detection models. The Object Detection API also comes with a collection of detection models pre-trained on the COCO dataset that are well suited for fast prototyping. Specifically, we use a lightweight model: ssd\_mobilenet\_v1\_coco that is based on Single Shot Multibox Detection (SSD) framework with minimal modification. Though this is a general-purpose detection model (not specifically optimized for vehicle detection), we find this model achieves the balance between bounding box accuracy and inference time.
 
-The detector is implemented in ```CarDetector``` class in detector.py. The output are coordinates the bounding boxes (in the format of [y\_up, x\_left, y\_down, x\_right] ) of all the detected vehicles.
+The detector is implemented in ```CarDetector``` class in detector.py. The output are the coordinates of the bounding boxes (in the format of [y\_up, x\_left, y\_down, x\_right] ) of all the detected vehicles.
 
 The COCO dataset contains images of 90 classes, with the first 14 classes all related to transportation, including bicycle, car, and bus, etc. The ID for car is 3.
 
