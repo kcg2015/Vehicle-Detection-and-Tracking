@@ -164,9 +164,9 @@ an untracked object. When a car leaves the frame, the previously established tra
 
 We include two important design parameters, ```min_hits``` and ```max_age```, in the pipeline.  The parameter ```min_hits``` is the number of consecutive matches needed to establish a track. The parameter ```max_age``` is number of consecutive unmatched detections before a track is deleted. Both parameters need to be tuned to improve the tracking and detection performance.
 
-The pipeline deals with matched detection, unmatched detection, and unmatched trackers sequentially. We annotate the tracks that meet the ```min_hits``` and ```max_age``` condition. Proper book keeping is also needed to deleted the stale tracks. 
+The pipeline deals with matched detection, unmatched detection, and unmatched trackers sequentially. We annotate the tracks that meet the ```min_hits``` and ```max_age``` condition. Proper book keeping is also needed to delete the stale tracks. 
 
-The following examples shows the process of the pipeline. When the car is first detected in the first video frame, running the following line of code returns an empty list, an one-element list, and an empty list  for ```matched```, ```unmatched_dets```, and ```unmatched_trks```, respectively. 
+The following examples show the process of the pipeline. When the car is first detected in the first video frame, running the following line of code returns an empty list, an one-element list, and an empty list  for ```matched```, ```unmatched_dets```, and ```unmatched_trks```, respectively. 
 
 ```
 matched, unmatched_dets, unmatched_trks \
