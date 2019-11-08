@@ -46,11 +46,11 @@ Here ```boxes```, ```scores```, and ```classes``` represent the bounding box, co
 ```
 idx_vec = [i for i, v in enumerate(cls) if ((v==3) and (scores[i]>0.3))]
 ```
-To detect all kinds of vehicle, we also include the indices for bus and truck.
+To detect all kinds of vehicles, we also include the indices for bus and truck.
 ```
 idx_vec = [i for i, v in enumerate(cls) if (((v==3) or (v==6) or (v==8)) and (scores[i]>0.3))]
 ```
-To further reduce false positive, we include thresholds for bounding box width, height, and height-to-width ratio. 
+To further reduce possible false positives, we include thresholds for bounding box width, height, and height-to-width ratio.
 
 ```
 if ((ratio < 0.8) and (box_h>20) and (box_w>20)):
