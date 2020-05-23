@@ -2,17 +2,18 @@
 # -*- coding: utf-8 -*-
 """@author: kyleguan
 """
+import time
 
 import numpy as np
 import matplotlib.pyplot as plt
 import glob
 from moviepy.editor import VideoFileClip
 from collections import deque
-from sklearn.utils.linear_assignment_ import linear_assignment
+from scipy.optimize import linear_sum_assignment
 
 import helpers
 import detector
-import tracker
+from tracker import Tracker
 
 # Global variables to be used by funcitons of VideoFileClop
 frame_count = 0 # frame counter
@@ -39,13 +40,15 @@ def assign_detections_to_trackers(trackers, detections, iou_thrd = 0.3):
         #trk = convert_to_cv2bbox(trk) 
         for d,det in enumerate(detections):
          #   det = convert_to_cv2bbox(det)
-            IOU_mat[t,d] = box_iou2(trk,det) 
+            IOU_mat[t,d] = helpers.box_iou2(trk, det)
     
     # Produces matches       
     # Solve the maximizing the sum of IOU assignment problem using the
     # Hungarian algorithm (also known as Munkres algorithm)
     
-    matched_idx = linear_assignment(-IOU_mat)        
+    indices = linear_sum_assignment(-IOU_mat)  
+    indices = np.asarray(indices)
+    matched_idx = np.transpose(indices)
 
     unmatched_trackers, unmatched_detections = [], []
     for t,trk in enumerate(trackers):
@@ -108,8 +111,7 @@ def pipeline(img):
             x_box.append(trk.box)
     
     
-    matched, unmatched_dets, unmatched_trks \
-    = assign_detections_to_trackers(x_box, z_box, iou_thrd = 0.3)  
+    matched, unmatched_dets, unmatched_trks = assign_detections_to_trackers(x_box, z_box, iou_thrd = 0.3)
     if debug:
          print('Detection: ', z_box)
          print('x_box: ', x_box)
@@ -191,23 +193,11 @@ def pipeline(img):
 if __name__ == "__main__":    
     
     det = detector.CarDetector()
-    
-    if debug: # test on a sequence of images
-        images = [plt.imread(file) for file in glob.glob('./test_images/*.jpg')]
-        
-        for i in range(len(images))[0:7]:
-             image = images[i]
-             image_box = pipeline(image)   
-             plt.imshow(image_box)
-             plt.show()
-           
-    else: # test on a video file.
-        
-        start=time.time()
-        output = 'test_v7.mp4'
-        clip1 = VideoFileClip("project_video.mp4")#.subclip(4,49) # The first 8 seconds doesn't have any cars...
-        clip = clip1.fl_image(pipeline)
-        clip.write_videofile(output, audio=False)
-        end  = time.time()
-        
-        print(round(end-start, 2), 'Seconds to finish')
+    start=time.time()
+    output = 'test_v7.mp4'
+    clip1 = VideoFileClip("project_video.mp4")#.subclip(4,49) # The first 8 seconds doesn't have any cars...
+    clip = clip1.fl_image(pipeline)
+    clip.write_videofile(output, audio=False)
+    end  = time.time()
+
+    print(round(end-start, 2), 'Seconds to finish')

@@ -33,18 +33,18 @@ class CarDetector(object):
         self.detection_graph = tf.Graph()
         
         # configuration for possible GPU use
-        config = tf.ConfigProto()
+        config = tf.compat.v1.ConfigProto()
         config.gpu_options.allow_growth = True
         # load frozen tensorflow detection model and initialize 
         # the tensorflow graph
         with self.detection_graph.as_default():
-            od_graph_def = tf.GraphDef()
-            with tf.gfile.GFile(PATH_TO_CKPT, 'rb') as fid:
+            od_graph_def = tf.compat.v1.GraphDef()
+            with tf.compat.v1.gfile.GFile(PATH_TO_CKPT, 'rb') as fid:
                serialized_graph = fid.read()
                od_graph_def.ParseFromString(serialized_graph)
                tf.import_graph_def(od_graph_def, name='')
                
-            self.sess = tf.Session(graph=self.detection_graph, config=config)
+            self.sess = tf.compat.v1.Session(graph=self.detection_graph, config=config)
             self.image_tensor = self.detection_graph.get_tensor_by_name('image_tensor:0')
               # Each box represents a part of the image where a particular object was detected.
             self.boxes = self.detection_graph.get_tensor_by_name('detection_boxes:0')
